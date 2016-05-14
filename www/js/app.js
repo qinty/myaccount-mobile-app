@@ -21,12 +21,33 @@ angular.module('starter', ['ionic', 'starter.controllers', 'jett.ionic.filter.ba
             }
 
             var push = new Ionic.Push({
-                "debug": true
+                debug: true,
+                onNotification: function (notification) {
+                    // this function will be called when your device receives a notification, and provided with the notification object received.
+                    var payload = notification.payload;
+                    console.log(notification, payload);
+                },
+                onRegister: function (data) {
+                    // This function will be called upon successful registration of your device,
+                    // and provided with a data argument that contains a token string with your device token.
+
+                    console.log(data);
+                },
+                pluginConfig: {
+                    ios: {
+                        badge: true,
+                        sound: true
+                    },
+
+                    android: {
+                        iconColor: "#ff3333"
+                    }
+                }
             });
 
             push.register(function(token) {
-                console.log("Device token:",token.token);
-                //alert(["Device token: ",token.token]);
+                console.log(token.token);
+                //alert(["Device token: ", token.token]);
                 push.saveToken(token);  // persist the token in the Ionic Platform
             });
         });
@@ -85,4 +106,11 @@ angular.module('starter', ['ionic', 'starter.controllers', 'jett.ionic.filter.ba
             });
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/app/products');
-    });
+    })
+    //.controller('PushCtrl', function ($scope, $rootScope, $ionicUser, $ionicPush) {
+    //    $rootScope.$on('$cordovaPush:tokenReceived', function (event, data) {
+    //        alert([event, data]);
+    //    });
+    //})
+;
+
