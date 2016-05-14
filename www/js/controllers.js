@@ -37,7 +37,7 @@ angular.module('starter.controllers', [])
         var userInfo = getUser();
         $.ajax({
             type: 'GET',
-            url: 'http://www.myaccount.dev/api/subscriptions',
+            url: 'http://ec2-52-50-67-73.eu-west-1.compute.amazonaws.com/api/subscriptions',
             dataType: 'json',
             data: {
                username: userInfo.email
@@ -59,7 +59,7 @@ angular.module('starter.controllers', [])
         var userInfo = getUser();
         $.ajax({
             type: 'GET',
-            url: 'http://www.myaccount.dev/api/subscriptions/' + $stateParams.productCode,
+            url: 'http://ec2-52-50-67-73.eu-west-1.compute.amazonaws.com/api/subscriptions/' + $stateParams.productCode,
             dataType: 'json',
             data: {
                 username: userInfo.email
@@ -96,7 +96,7 @@ angular.module('starter.controllers', [])
             if (allOk) {
                 $.ajax({
                     type: 'GET',
-                    url: 'http://www.myaccount.dev/api/login',
+                    url: 'http://ec2-52-50-67-73.eu-west-1.compute.amazonaws.com/api/login',
                     dataType: 'json',
                     data: {
                         username: emailCtrl.val(),
@@ -112,7 +112,11 @@ angular.module('starter.controllers', [])
         console.log(userInfo)
     }])
 
-    .controller('LoginCtrl', function ($rootScope, $scope, $state) {
+    .controller('CardsCtrl', ['$rootScope', '$scope', '$stateParams', function ($rootScope, $scope, $stateParams) {
+    }])
+
+
+  .controller('LoginCtrl', function ($rootScope, $scope, $state) {
         $rootScope.showHeader = false;
         $('#main-nav').hide();
         $scope.login = function () {
@@ -139,7 +143,7 @@ angular.module('starter.controllers', [])
             if (allOk) {
                 $.ajax({
                     type: 'GET',
-                    url: 'http://www.myaccount.dev/api/login',
+                    url: 'http://ec2-52-50-67-73.eu-west-1.compute.amazonaws.com/api/login',
                     dataType: 'json',
                     data: {
                         username: emailCtrl.val(),
