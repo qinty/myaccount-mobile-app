@@ -200,7 +200,7 @@ angular.module('starter.controllers', [])
                     var field = cardIOResponseFields[i];
                     cardFields[field] = response[field];
                 }
-                cardFields[username] = userInfo.email;
+                cardFields['username'] = userInfo.email;
 
                 $.ajax({
                     type: 'GET',
@@ -213,8 +213,6 @@ angular.module('starter.controllers', [])
                         });
                     }
                 });
-
-                console.log(cardFields);
             };
 
             var onCardIOCancel = function () {
@@ -235,6 +233,22 @@ angular.module('starter.controllers', [])
             };
 
             CardIO.canScan(onCardIOCheck);
+        }
+        
+        $scope.deleteCard = function(cardId) {
+            $.ajax({
+                type: 'GET',
+                url: 'http://ec2-52-50-67-73.eu-west-1.compute.amazonaws.com/api/cards-delete/' + cardId,
+                dataType: 'json',
+                data: {
+                    username: userInfo.email
+                },
+                success: function (data) {
+                    $scope.$apply(function () {
+                        $scope.cards = data;
+                    });
+                }
+            });
         }
     }])
 
