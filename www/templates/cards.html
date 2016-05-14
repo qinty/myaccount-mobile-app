@@ -1,21 +1,27 @@
 <ion-view view-title="Product title">
-  <ion-content>
-    <div class="grey-header">
-      <h2 class="grey-heading-title">Cards</h2>
-    </div>
-    <img src="images/visa.jpg">
-      <div class="bottom-line">
-        <div class="row">
-          <button class="button button-balanced border col col-50" style="float: left;">Set default</button>
-          <button class="button button-balanced border col col-50" style="float: right;">Edit details</button>
+    <ion-content>
+        <div class="grey-header">
+            <h2 class="grey-heading-title">Cards</h2>
         </div>
-        <div>
-          <button class="button button-block button-assertive">Delete card</button>
-        </div>
-      </div>
-    <div>
-      <button class="button button-block button-positive">Add new card</button>
-    </div>
 
-  </ion-content>
+        <div ng-repeat="card in cards">
+            <h2 class="title-new">Digits (first / last): {{card.firstDigits}} / {{card.lastDigits}}</h2>
+            <img src="{{card.image}}">
+            <div class="bottom-line">
+                <div class="row">
+                    <button class="button button-balanced border col col-50" style="float: left;margin-right: 5px;">Set default</button>
+                    <button class="button button-balanced border col col-50" style="float: right;">Edit details</button>
+                </div>
+                <div>
+                    <button class="button button-block button-assertive">Delete card</button>
+                </div>
+            </div>
+            <div class="separator-fields"></div>
+        </div>
+
+        <div>
+            <button class="button button-block button-positive" ng-click="scanCard()">Add new card</button>
+        </div>
+
+    </ion-content>
 </ion-view>

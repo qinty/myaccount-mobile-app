@@ -7,6 +7,9 @@
         "files": {}
     },
     "installed_plugins": {
+        "card.io.cordova.mobilesdk": {
+            "PACKAGE_NAME": "com.avangate.myaccount"
+        },
         "cordova-plugin-console": {
             "PACKAGE_NAME": "com.avangate.myaccount"
         },

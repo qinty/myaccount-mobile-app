@@ -20,19 +20,21 @@ angular.module('starter.controllers', [])
                 $state.go('app.login');
                 return false;
             } else {
-                userInfo = JSON.parse(userInfo);
                 return true;
             }
         };
+
+        $rootScope.logout = function () {
+            localStorage.removeItem('user');
+            $state.go('app.login');
+        }
     })
 
     .controller('ProductsCtrl', ['$rootScope', '$scope', function ($rootScope, $scope) {
         if (!$rootScope.checkLogin()) {
             return;
         }
-
-        $('#main-nav').show();
-
+        $('#main-nav').removeClass('hide');
         var userInfo = getUser();
         $.ajax({
             type: 'GET',
@@ -42,7 +44,9 @@ angular.module('starter.controllers', [])
                 username: userInfo.email
             },
             success: function (data) {
-                $scope.products = data;
+                $scope.$apply(function () {
+                    $scope.products = data;
+                });
             }
         });
     }])
@@ -51,9 +55,7 @@ angular.module('starter.controllers', [])
         if (!$rootScope.checkLogin()) {
             return;
         }
-
-        $('#main-nav').show();
-
+        $('#main-nav').removeClass('hide');
         var userInfo = getUser();
         $.ajax({
             type: 'GET',
@@ -64,7 +66,9 @@ angular.module('starter.controllers', [])
             },
             success: function (data) {
                 $('#page-title').html(data.name);
-                $scope.product = data;
+                $scope.$apply(function () {
+                    $scope.product = data;
+                });
             }
         });
     }])
@@ -75,7 +79,7 @@ angular.module('starter.controllers', [])
                 {id: 180, name: 'Romania'},
                 {id: 2, name: 'USA'}
             ];
-        $scope.user = userInfo;
+        $scope.user   = userInfo;
 
         var formCtrl        = $('#profile-form'),
             firstNameCtrl   = formCtrl.find('#ebFirstNameCtrl'),
@@ -157,16 +161,90 @@ angular.module('starter.controllers', [])
             }
         };
     }])
+    .controller('CardsCtrl', ['$rootScope', '$scope', function ($rootScope, $scope) {
+        if (!$rootScope.checkLogin()) {
+            return;
+        }
+        $('#main-nav').removeClass('hide');
 
-    .controller('CardsCtrl', ['$rootScope', '$scope', '$stateParams', function ($rootScope, $scope, $stateParams) {
+        var userInfo = getUser();
+        $.ajax({
+            type: 'GET',
+            url: 'http://ec2-52-50-67-73.eu-west-1.compute.amazonaws.com/api/cards',
+            dataType: 'json',
+            data: {
+                username: userInfo.email
+            },
+            success: function (data) {
+                $scope.$apply(function () {
+                    $scope.cards = data;
+                });
+            }
+        });
+
+        $scope.scanCard = function () {
+            var cardIOResponseFields = [
+                "cardType",
+                "redactedCardNumber",
+                "cardNumber",
+                "expiryMonth",
+                "expiryYear",
+                "cvv",
+                "postalCode"
+            ],
+            cardFields = {};
+
+            var onCardIOComplete = function (response) {
+                console.log("card.io scan complete");
+                for (var i = 0, len = cardIOResponseFields.length; i < len; i++) {
+                    var field = cardIOResponseFields[i];
+                    cardFields[field] = response[field];
+                }
+                cardFields[username] = userInfo.email;
+
+                $.ajax({
+                    type: 'GET',
+                    url: 'http://ec2-52-50-67-73.eu-west-1.compute.amazonaws.com/api/cards-add',
+                    dataType: 'json',
+                    data: cardFields,
+                    success: function (data) {
+                        $scope.$apply(function () {
+                            $scope.cards = data;
+                        });
+                    }
+                });
+
+                console.log(cardFields);
+            };
+
+            var onCardIOCancel = function () {
+                console.log("card.io scan cancelled");
+            };
+
+            var onCardIOCheck = function (canScan) {
+                console.log("card.io canScan? " + canScan);
+                CardIO.scan({
+                        "requireExpiry": true,
+                        "requireCVV": false,
+                        "requirePostalCode": false,
+                        "restrictPostalCodeToNumericOnly": true
+                    },
+                    onCardIOComplete,
+                    onCardIOCancel
+                );
+            };
+
+            CardIO.canScan(onCardIOCheck);
+        }
     }])
 
 
-  .controller('LoginCtrl', function ($rootScope, $scope, $state) {
-        $rootScope.showHeader = false;
-        $('#main-nav').hide();
-        $scope.login = function () {
+    .controller('LoginCtrl', function ($rootScope, $scope, $state) {
+        if ($rootScope.checkLogin()) {
+            $state.go('app.products');
+        }
 
+        $scope.login = function () {
             var formCtrl     = $('#login-form'),
                 emailCtrl    = formCtrl.find('#ebEmail'),
                 passwordCtrl = formCtrl.find('#ebPassword'),

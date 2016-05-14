@@ -107,34 +107,50 @@ angular.module('starter', ['ionic', 'starter.controllers', 'jett.ionic.filter.ba
             });
         });
 
-        $rootScope.$on("$locationChangeStart", function(event, next, current) {
+        $rootScope.$on("$locationChangeStart", function (event, next, current) {
             var currentRoute = next.split('#');
-            currentRoute = currentRoute[1];
+            currentRoute     = currentRoute[1];
 
-            var title = '';
+            console.log(next)
+            var title   = '',
+                showNav = true;
             switch (currentRoute) {
-                case '/app/profile': {
+                case '/app/profile':
+                {
                     title = 'Profile';
                     break;
                 }
-                case '/app/products': {
+                case '/app/products':
+                {
                     title = 'My Subscriptions';
                     break;
                 }
-                case '/app/cars': {
+                case '/app/cards':
+                {
                     title = 'My cards';
                     break;
                 }
+                case '/app/login':
+                {
+                    title = 'Login';
+                    showNav = false;
+                    break;
+                }
                 default: {
-
+                    showNav = false;
                 }
             }
 
+            if (showNav) {
+                $('#main-nav').removeClass('hide');
+            } else {
+                $('#main-nav').addClass('hide');
+            }
+
             $('#page-title').html(title);
-            // handle route changes
         });
     }])
-    .config(function($httpProvider) {
+    .config(function ($httpProvider) {
         //Enable cross domain calls
         $httpProvider.defaults.useXDomain = true;
     })
@@ -142,24 +158,24 @@ angular.module('starter', ['ionic', 'starter.controllers', 'jett.ionic.filter.ba
 
         $stateProvider
             .state('app', {
-                url        : '/app',
-                abstract   : true,
+                url: '/app',
+                abstract: true,
                 templateUrl: 'templates/content.html',
-                controller : 'AppCtrl'
+                controller: 'AppCtrl'
             })
 
             .state('app.login', {
-                url  : '/login',
+                url: '/login',
                 views: {
                     'menuContent': {
                         templateUrl: 'templates/login.html',
-                        controller : 'LoginCtrl'
+                        controller: 'LoginCtrl'
                     }
                 }
             })
 
             .state('app.browse', {
-                url  : '/browse',
+                url: '/browse',
                 views: {
                     'menuContent': {
                         templateUrl: 'templates/browse.html'
@@ -171,32 +187,32 @@ angular.module('starter', ['ionic', 'starter.controllers', 'jett.ionic.filter.ba
                 }
             })
             .state('app.products', {
-                url  : '/products',
+                url: '/products',
                 views: {
                     'menuContent': {
                         templateUrl: 'templates/products.html',
-                        controller : 'ProductsCtrl'
+                        controller: 'ProductsCtrl'
                     }
                 }
             })
 
             .state('app.single', {
-                url  : '/products/:productCode',
+                url: '/products/:productCode',
                 views: {
                     'menuContent': {
                         templateUrl: 'templates/product.html',
-                        controller : 'ProductCtrl'
+                        controller: 'ProductCtrl'
                     }
                 }
             })
             .state('app.profile', {
-              url  : '/profile',
-              views: {
-                'menuContent': {
-                  templateUrl: 'templates/profile.html',
-                  controller : 'ProfileCtrl'
+                url: '/profile',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/profile.html',
+                        controller: 'ProfileCtrl'
+                    }
                 }
-              }
             })
             .state('app.cards', {
               url  : '/cards',
@@ -208,5 +224,5 @@ angular.module('starter', ['ionic', 'starter.controllers', 'jett.ionic.filter.ba
               }
             })
         // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise('/app/products');
+        $urlRouterProvider.otherwise('/app/login');
     });
