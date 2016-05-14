@@ -6,7 +6,7 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers', 'jett.ionic.filter.bar', 'ngCordova', 'ionic-native-transitions'])
 
-    .run(['$ionicPlatform', '$cordovaToast', '$cordovaContacts', '$state', '$rootScope', function ($ionicPlatform, $cordovaToast, $cordovaContacts, $state, $rootScope) {
+    .run(['$ionicPlatform', '$cordovaToast', '$cordovaContacts', function ($ionicPlatform) {
         $ionicPlatform.ready(function () {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
@@ -104,11 +104,41 @@ angular.module('starter', ['ionic', 'starter.controllers', 'jett.ionic.filter.ba
                 });
             });
         });
+
+        $rootScope.$on("$locationChangeStart", function(event, next, current) {
+            var currentRoute = next.split('#');
+            currentRoute = currentRoute[1];
+
+            var title = '';
+            switch (currentRoute) {
+                case '/app/profile': {
+                    title = 'Profile';
+                    break;
+                }
+                case '/app/products': {
+                    title = 'My Subscriptions';
+                    break;
+                }
+                case '/app/cars': {
+                    title = 'My cards';
+                    break;
+                }
+                default: {
+
+                }
+            }
+
+            $('#page-title').html(title);
+            // handle route changes
+        });
     }])
+    .config(function($httpProvider) {
+        //Enable cross domain calls
+        $httpProvider.defaults.useXDomain = true;
+    })
     .config(function ($stateProvider, $urlRouterProvider) {
 
         $stateProvider
-
             .state('app', {
                 url        : '/app',
                 abstract   : true,
@@ -157,12 +187,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'jett.ionic.filter.ba
                     }
                 }
             })
-            .state('app.settings', {
-              url  : '/settings',
+            .state('app.profile', {
+              url  : '/profile',
               views: {
                 'menuContent': {
-                  templateUrl: 'templates/settings.html',
-                  controller : 'SettingsCtrl'
+                  templateUrl: 'templates/profile.html',
+                  controller : 'ProfileCtrl'
                 }
               }
             })
