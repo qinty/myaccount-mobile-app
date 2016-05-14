@@ -1,25 +1,30 @@
 <ion-view view-title="My Subscriptions">
-  <ion-content>
-    <div class="grey-header">
-      <h2 class="grey-heading-title">My Subscriptions</h2>
-    </div>
-    <a href="/#/app/products/bit"><img src="images/bitdefender.png">
-    <div class="text-new no-borders">
-      <div>
-        <h2 class="title-new">Bitdefender - Total security 2015</h2>
-        <div class="separator-fields"></div>
-        <p class="description-new">Cea mai bună protecție. Cea mai bună performanță. Ușor de utilizat.</p>
-        <div class="separator-button"></div>
-      </div>
-    </div></a>
-    <a href="/#/app/products/photo"><img src="images/photoshop.jpg">
-    <div class="text-new no-borders">
-      <div>
-        <h2 class="title-new">Adobe Photoshop CC</h2>
-        <div class="separator-fields"></div>
-        <p class="description-new">The world's most powerful creative imaging app gives you a complete set of professional tools to transform your images into anything you can imagine.</p>
-        <div class="separator-button"></div>
-      </div>
-    </div></a>
-  </ion-content>
+    <ion-content>
+        <div class="grey-header">
+            <h2 class="grey-heading-title">My Subscriptions</h2>
+        </div>
+        <a href="#/app/products/{{product.id}}" ng-repeat="product in products">
+            <img src="{{product.image}}">
+            <div class="text-new no-borders">
+                <div>
+                    <h2 class="title-new">{{product.name}}</h2>
+                    <div class="separator-fields"></div>
+                    <p class="description-new">{{product.description}}</p>
+                    <div class="separator-button"></div>
+                </div>
+            </div>
+        </a>
+        <!--<a href="#/app/products/ceva">-->
+            <!--<img src="images/photoshop.jpg">-->
+            <!--<div class="text-new no-borders">-->
+                <!--<div>-->
+                    <!--<h2 class="title-new">Adobe Photoshop CC</h2>-->
+                    <!--<div class="separator-fields"></div>-->
+                    <!--<p class="description-new">The world's most powerful creative imaging app gives you a complete set of-->
+                        <!--professional tools to transform your images into anything you can imagine.</p>-->
+                    <!--<div class="separator-button"></div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</a>-->
+    </ion-content>
 </ion-view>

@@ -20,21 +20,24 @@ angular.module('starter', ['ionic', 'starter.controllers', 'jett.ionic.filter.ba
                 StatusBar.styleDefault();
             }
 
-            var push = new Ionic.Push({
-                "debug": true
-            });
-
-            push.register(function(token) {
-                console.log("Device token:",token.token);
-                //alert(["Device token: ",token.token]);
-                push.saveToken(token);  // persist the token in the Ionic Platform
-            });
+            // var push = new Ionic.Push({
+            //     "debug": true
+            // });
+            //
+            // push.register(function(token) {
+            //     console.log("Device token:",token.token);
+            //     //alert(["Device token: ",token.token]);
+            //     push.saveToken(token);  // persist the token in the Ionic Platform
+            // });
         });
     }])
+    .config(function($httpProvider) {
+        //Enable cross domain calls
+        $httpProvider.defaults.useXDomain = true;
+    })
     .config(function ($stateProvider, $urlRouterProvider) {
 
         $stateProvider
-
             .state('app', {
                 url        : '/app',
                 abstract   : true,
@@ -83,12 +86,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'jett.ionic.filter.ba
                     }
                 }
             })
-            .state('app.settings', {
-              url  : '/settings',
+            .state('app.profile', {
+              url  : '/profile',
               views: {
                 'menuContent': {
-                  templateUrl: 'templates/settings.html',
-                  controller : 'SettingsCtrl'
+                  templateUrl: 'templates/profile.html',
+                  controller : 'ProfileCtrl'
                 }
               }
             })
