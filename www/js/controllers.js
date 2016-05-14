@@ -24,7 +24,7 @@ angular.module('starter.controllers', [])
     })
 
     .controller('ProductsCtrl', ['$rootScope', '$scope', '$http', function ($rootScope, $scope, $http) {
-        $rootScope.checkLogin();
+        //$rootScope.checkLogin();
         //$scope.login();
         //console.log('aici')
         // $http({
@@ -42,12 +42,17 @@ angular.module('starter.controllers', [])
 
     .controller('ProductCtrl', function ($scope, $stateParams) {
     })
+
+    .controller('SettingsCtrl', ['$rootScope', '$scope', '$http', function ($rootScope, $scope, $http) {
+    }])
+
+
     .controller('LoginCtrl', function ($rootScope, $scope) {
         $rootScope.showHeader = false;
-        
+
         $scope.login = function () {
-            
+
         };
-        
+
         console.log('aici');
     });
