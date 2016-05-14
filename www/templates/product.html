@@ -1,51 +1,54 @@
 <ion-view view-title="Product title">
-  <ion-content>
-    <img src="images/bitdefender.png">
-    <div class="text-new no-borders">
-      <div>
-        <h2 class="title-new">Bitdefender - Total security 2015</h2>
-        <p class="description-new">Cea mai bună protecție. Cea mai bună performanță. Ușor de utilizat.</p>
-        <div class="event-title"style="float: left;">Time left</div>
-        <div class="w-clearfix text-event-wrap" style="float: right;">
-          <div class="left-text-icon icon ion-calendar"></div>
-          <div class="event-text" >206 days left</div>
-        </div>
-        <div>
-        <button class="button button-block button-positive">
-          Renew Now
-        </button>
-        </div>
-        <div>
-          <h2 class="title-new bottom-line">Recommended products</h2>
-          <div class="separator-fields"></div>
-          <div>
+    <ion-content>
+        <img src="{{product.image}}">
+        <div class="text-new no-borders">
             <div>
-              <a href="/#/app/products/bit">
-              <img src="images/bitdefender.png">
-              <div class="text-new no-borders">
-                <div>
-                  <h2 class="title-new">Bitdefender - Total security 2016</h2>
-                  <p class="description-new">Upgradeaza acum la cea mai recenta varianta de antivirus pentru o protectie si mai buna.</p>
+                <h2 class="title-new">{{product.name}}</h2>
+                <p class="description-new">{{product.description}}</p>
+                <div class="event-title" style="float: left;">Time left</div>
+                <div class="w-clearfix text-event-wrap" style="float: right;">
+                    <div class="left-text-icon icon ion-calendar"></div>
+                    <div class="event-text">206 days left</div>
                 </div>
-              </div>
-              </a>
+                <div>
+                    <button class="button button-block button-positive">
+                        Renew Now
+                    </button>
+                </div>
+                <div>
+                    <h2 class="title-new bottom-line">Recommended products</h2>
+                    <div class="separator-fields"></div>
+                    <div>
+                        <div>
+                            <a href="/#/app/products/bit">
+                                <img src="images/bitdefender.png">
+                                <div class="text-new no-borders">
+                                    <div>
+                                        <h2 class="title-new">Bitdefender - Total security 2016</h2>
+                                        <p class="description-new">Upgradeaza acum la cea mai recenta varianta de
+                                            antivirus pentru o protectie si mai buna.</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div>
+                        <a href="/#/app/products/photo">
+                            <img src="images/photoshop.jpg">
+                            <div class="text-new no-borders">
+                                <div>
+                                    <h2 class="title-new">Adobe Photoshop CC</h2>
+                                    <div class="separator-fields"></div>
+                                    <p class="description-new">The world's most powerful creative imaging app gives you
+                                        a complete set of professional tools to transform your images into anything you
+                                        can imagine.</p>
+                                    <div class="separator-button"></div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div>
-            <a href="/#/app/products/photo">
-              <img src="images/photoshop.jpg">
-              <div class="text-new no-borders">
-                <div>
-                  <h2 class="title-new">Adobe Photoshop CC</h2>
-                  <div class="separator-fields"></div>
-                  <p class="description-new">The world's most powerful creative imaging app gives you a complete set of professional tools to transform your images into anything you can imagine.</p>
-                  <div class="separator-button"></div>
-                </div>
-              </div>
-            </a>
-          </div>
         </div>
-      </div>
-    </div>
-  </ion-content>
+    </ion-content>
 </ion-view>
