@@ -37,3 +37,7 @@ input[required="required"] {
 .body {
   padding-top: 0px;
 }
+
+input.required {
+  border-bottom: 2px solid red !important;
+}

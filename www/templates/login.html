@@ -5,21 +5,21 @@
                 <div class="logo-login"></div>
                 <div class="bottom-section padding">
                     <div class="w-form">
-                        <form id="submit-form" name="email-form" action="#" data-redirect="home.html">
+                        <form id="login-form" name="email-form" action="#" data-redirect="home.html">
                             <div>
-                                <label class="label-form light" for="email-field">EMAIL</label>
-                                <input class="w-input input-form light" id="email-field" type="email" name="email">
+                                <label class="label-form light" for="ebEmail">EMAIL</label>
+                                <input class="w-input input-form light" id="ebEmail" type="email" name="email" value="george.simion@avangate.com">
                                 <div class="separator-fields"></div>
                             </div>
                             <div>
-                                <label class="label-form light" for="password-field">PASSWORD</label>
+                                <label class="label-form light" for="ebPassword">PASSWORD</label>
                                 <div class="block-input-combined">
-                                    <input class="w-input input-form light left" id="password-field" type="password" name="password">
+                                    <input class="w-input input-form light left" id="ebPassword" type="password" name="password" value="1234">
                                     <a class="right-input-link" href="forgot.html" data-load="1">Forgot Password</a>
                                 </div>
                                 <div class="separator-button-input"></div>
                             </div>
-                            <button class="w-button action-button" type="button" data-wait="Please wait...">Login</button>
+                            <button class="w-button action-button" type="button" data-wait="Please wait..." ng-click="login();">Login</button>
                             <div class="separator-button"></div>
                         </form>
                     </div>
