@@ -196,6 +196,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'jett.ionic.filter.ba
                 }
               }
             })
+            .state('app.cards', {
+              url  : '/cards',
+              views: {
+                'menuContent': {
+                  templateUrl: 'templates/cards.html',
+                  controller : 'CardsCtrl'
+                }
+              }
+            })
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/app/products');
     });

@@ -158,7 +158,11 @@ angular.module('starter.controllers', [])
         };
     }])
 
-    .controller('LoginCtrl', function ($rootScope, $scope, $state) {
+    .controller('CardsCtrl', ['$rootScope', '$scope', '$stateParams', function ($rootScope, $scope, $stateParams) {
+    }])
+
+
+  .controller('LoginCtrl', function ($rootScope, $scope, $state) {
         $rootScope.showHeader = false;
         $('#main-nav').hide();
         $scope.login = function () {
