@@ -51,3 +51,6 @@ input[required="required"] {
 input.required {
   border-bottom: 2px solid red !important;
 }
+.hide {
+  display: none !important;
+}
