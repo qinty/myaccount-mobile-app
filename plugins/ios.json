@@ -1,0 +1,34 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {}
+    },
+    "installed_plugins": {
+        "cordova-plugin-console": {
+            "PACKAGE_NAME": "com.avangate.myaccount"
+        },
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "com.avangate.myaccount"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "com.avangate.myaccount"
+        },
+        "cordova-plugin-statusbar": {
+            "PACKAGE_NAME": "com.avangate.myaccount"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.avangate.myaccount"
+        },
+        "ionic-plugin-keyboard": {
+            "PACKAGE_NAME": "com.avangate.myaccount"
+        },
+        "phonegap-plugin-push": {
+            "SENDER_ID": "GCM_PROJECT_NUMBER",
+            "PACKAGE_NAME": "com.avangate.myaccount"
+        }
+    },
+    "dependent_plugins": {}
+}
