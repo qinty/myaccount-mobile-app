@@ -6,7 +6,7 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers', 'jett.ionic.filter.bar', 'ngCordova', 'ionic-native-transitions'])
 
-    .run(['$ionicPlatform', '$cordovaToast', '$cordovaContacts', '$rootScope', function ($ionicPlatform, $cordovaToast, $cordovaContacts, $rootScope) {
+    .run(['$ionicPlatform', '$cordovaToast', '$cordovaContacts', '$rootScope', '$state', '$ionicPopup', function ($ionicPlatform, $cordovaToast, $cordovaContacts, $rootScope, $state, $ionicPopup) {
         $ionicPlatform.ready(function () {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
@@ -20,6 +20,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'jett.ionic.filter.ba
                 StatusBar.styleDefault();
             }
 
+
+
             var push = new Ionic.Push({
                 "debug": true,
                 canShowAlert: true, //Can pushes show an alert on your screen?
@@ -28,21 +30,21 @@ angular.module('starter', ['ionic', 'starter.controllers', 'jett.ionic.filter.ba
                 canRunActionsOnWake: true, //Can run actions outside the app,
 
                 "onNotification": function (notification) {
-                    console.log(notification);
                     // this function will be called when your device receives a notification, and provided with the notification object received.
                     var payload = notification.payload;
-                    console.log(notification);
 
-                    if (payload.productCode !== undefined) {
-                        navigator.notification.confirm('', function(btn) {
-                            if (btn === 1) {
+                    if (payload.productCode) {
+                        var confirmPopup = $ionicPopup.confirm({
+                            title: notification.text,
+                            template: payload.description
+                        });
+
+                        confirmPopup.then(function(res) {
+                            if(res) {
                                 $state.go('app.single', {'productCode':payload.productCode});
                             }
-                        }, notification.text)
-
-
+                        });
                     }
-
                     return true;
                 },
 
