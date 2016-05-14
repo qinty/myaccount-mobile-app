@@ -139,7 +139,7 @@ angular.module('starter.controllers', [])
             if (allOk) {
                 $.ajax({
                     type: 'GET',
-                    url: 'http://ec2-52-50-67-73.eu-west-1.compute.amazonaws.com/api/login',
+                    url: 'http://ec2-52-50-67-73.eu-west-1.compute.amazonaws.com/api/shoppers-update/' + userInfo.id,
                     dataType: 'json',
                     data: {
                         username: userInfo.email,
