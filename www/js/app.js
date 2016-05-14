@@ -22,7 +22,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'jett.ionic.filter.ba
         });
     }])
     .config(function ($stateProvider, $urlRouterProvider) {
-        
+
         $stateProvider
 
             .state('app', {
@@ -32,16 +32,13 @@ angular.module('starter', ['ionic', 'starter.controllers', 'jett.ionic.filter.ba
                 controller : 'AppCtrl'
             })
 
-            .state('app.search', {
-                url  : '/search',
+            .state('app.login', {
+                url  : '/login',
                 views: {
                     'menuContent': {
-                        templateUrl: 'templates/search.html'
+                        templateUrl: 'templates/login.html',
+                        controller : 'LoginCtrl'
                     }
-                },
-                nativeTransitions: {
-                    "type": "flip",
-                    "direction": "up"
                 }
             })
 
@@ -77,5 +74,5 @@ angular.module('starter', ['ionic', 'starter.controllers', 'jett.ionic.filter.ba
                 }
             });
         // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise('/app/browse');
+        $urlRouterProvider.otherwise('/app/products');
     });

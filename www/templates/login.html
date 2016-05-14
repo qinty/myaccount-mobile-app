@@ -1,25 +1,35 @@
-<ion-modal-view>
-  <ion-header-bar>
-    <h1 class="title">Login</h1>
-    <div class="buttons">
-      <button class="button button-clear" ng-click="closeLogin()">Close</button>
-    </div>
-  </ion-header-bar>
-  <ion-content>
-    <form ng-submit="doLogin()">
-      <div class="list">
-        <label class="item item-input">
-          <span class="input-label">Username</span>
-          <input type="text" ng-model="loginData.username">
-        </label>
-        <label class="item item-input">
-          <span class="input-label">Password</span>
-          <input type="password" ng-model="loginData.password">
-        </label>
-        <label class="item">
-          <button class="button button-block button-positive" type="submit">Log in</button>
-        </label>
-      </div>
-    </form>
-  </ion-content>
-</ion-modal-view>
+<ion-view view-title="Product">
+    <section class="w-section mobile-wrapper">
+        <div class="page-content bg-gradient" id="main-stack" data-scroll="0">
+            <div class="body padding">
+                <div class="logo-login"></div>
+                <div class="bottom-section padding">
+                    <div class="w-form">
+                        <form id="submit-form" name="email-form" action="#" data-redirect="home.html">
+                            <div>
+                                <label class="label-form light" for="email-field">EMAIL</label>
+                                <input class="w-input input-form light" id="email-field" type="email" name="email">
+                                <div class="separator-fields"></div>
+                            </div>
+                            <div>
+                                <label class="label-form light" for="password-field">PASSWORD</label>
+                                <div class="block-input-combined">
+                                    <input class="w-input input-form light left" id="password-field" type="password" name="password">
+                                    <a class="right-input-link" href="forgot.html" data-load="1">Forgot Password</a>
+                                </div>
+                                <div class="separator-button-input"></div>
+                            </div>
+                            <button class="w-button action-button" type="button" data-wait="Please wait...">Login</button>
+                            <div class="separator-button"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page-content loading-mask" id="new-stack" style="display: none !important;">
+            <div class="loading-icon">
+                <div class="navbar-button-icon icon ion-load-d"></div>
+            </div>
+        </div>
+    </section>
+</ion-view>

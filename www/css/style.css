@@ -33,3 +33,7 @@ input[required="required"] {
 .radio-button label {
   font-size: 12px;
 }
+
+.body {
+  padding-top: 0px;
+}
