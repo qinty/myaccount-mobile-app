@@ -54,3 +54,7 @@ input.required {
 .hide {
   display: none !important;
 }
+
+.scroll-auto {
+  overflow: scroll !important;
+}
