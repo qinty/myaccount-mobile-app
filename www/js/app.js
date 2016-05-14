@@ -19,6 +19,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'jett.ionic.filter.ba
             if (window.StatusBar) {
                 StatusBar.styleDefault();
             }
+
+            var push = new Ionic.Push({
+                "debug": true
+            });
+
+            push.register(function(token) {
+                console.log("Device token:",token.token);
+                //alert(["Device token: ",token.token]);
+                push.saveToken(token);  // persist the token in the Ionic Platform
+            });
         });
     }])
     .config(function ($stateProvider, $urlRouterProvider) {
