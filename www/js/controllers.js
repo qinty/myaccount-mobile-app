@@ -1,4 +1,3 @@
-
 angular.module('starter.controllers', [])
 
     .controller('AppCtrl', function ($rootScope, $scope, $state) {
@@ -32,7 +31,6 @@ angular.module('starter.controllers', [])
         }
 
         $('#main-nav').show();
-        $('#page-title').html('My Subscriptions');
 
         var userInfo = getUser();
         $.ajax({
@@ -40,7 +38,7 @@ angular.module('starter.controllers', [])
             url: 'http://www.myaccount.dev/api/subscriptions',
             dataType: 'json',
             data: {
-               username: userInfo.email
+                username: userInfo.email
             },
             success: function (data) {
                 $scope.products = data;
@@ -54,7 +52,6 @@ angular.module('starter.controllers', [])
         }
 
         $('#main-nav').show();
-        $('#page-title').html('Subscription');
 
         var userInfo = getUser();
         $.ajax({
@@ -72,44 +69,92 @@ angular.module('starter.controllers', [])
     }])
 
     .controller('ProfileCtrl', ['$rootScope', '$scope', '$http', function ($rootScope, $scope, $http) {
-        var userInfo = getUser();
+        var userInfo  = getUser(),
+            countries = [
+                {id: 180, name: 'Romania'},
+                {id: 2, name: 'USA'}
+            ];
         $scope.user = userInfo;
-        $scope.save = function () {
-            var formCtrl     = $('#profile-form'),
-                firstNameCtrl = formCtrl.find('#ebFirstNameCtrl'),
-                allOk        = true;
 
-            if (!isEmailAddress(emailCtrl.val())) {
-                emailCtrl.addClass('required');
+        var formCtrl        = $('#profile-form'),
+            firstNameCtrl   = formCtrl.find('#ebFirstNameCtrl'),
+            lastNameCtrl    = formCtrl.find('#ebLastName'),
+            countryCtrl     = formCtrl.find('#sltCountries'),
+            cityCtrl        = formCtrl.find('#ebCity'),
+            addressCtrl     = formCtrl.find('#ebAddress'),
+            okMessageCtrl   = formCtrl.find('.w-form-done'),
+            failMessageCtrl = formCtrl.find('.w-form-fail');
+
+        var options = '';
+        for (var i = 0; i < countries.length; i++) {
+            options += '<option value="' + countries[i].id + '">' + countries[i].name + '</option>';
+        }
+
+        countryCtrl.html(options);
+        countryCtrl.val(userInfo.country_id);
+
+        $scope.save = function () {
+            var allOk = true;
+
+            if (firstNameCtrl.val() == '') {
+                firstNameCtrl.addClass('required');
                 allOk = false;
             } else {
-                emailCtrl.removeClass('required');
+                firstNameCtrl.removeClass('required');
             }
 
-            if (passwordCtrl.val() == '') {
-                passwordCtrl.addClass('required');
+            if (lastNameCtrl.val() == '') {
+                lastNameCtrl.addClass('required');
                 allOk = false;
             } else {
-                passwordCtrl.removeClass('required');
+                lastNameCtrl.removeClass('required');
+            }
+
+            if (countryCtrl.val() == '') {
+                countryCtrl.addClass('required');
+                allOk = false;
+            } else {
+                countryCtrl.removeClass('required');
+            }
+
+            if (cityCtrl.val() == '') {
+                cityCtrl.addClass('required');
+                allOk = false;
+            } else {
+                cityCtrl.removeClass('required');
+            }
+
+            if (addressCtrl.val() == '') {
+                addressCtrl.addClass('required');
+                allOk = false;
+            } else {
+                addressCtrl.removeClass('required');
             }
 
             if (allOk) {
                 $.ajax({
                     type: 'GET',
-                    url: 'http://www.myaccount.dev/api/login',
+                    url: 'http://www.myaccount.dev/api/shoppers-update/' + userInfo.id,
                     dataType: 'json',
                     data: {
-                        username: emailCtrl.val(),
-                        password: passwordCtrl.val()
+                        username: userInfo.email,
+                        firstName: firstNameCtrl.val(),
+                        lastName: lastNameCtrl.val(),
+                        country: countryCtrl.val(),
+                        city: cityCtrl.val(),
+                        address: addressCtrl.val()
                     },
                     success: function (data) {
+                        userInfo = data;
                         localStorage.setItem('user', JSON.stringify(data));
-                        $state.go('app.products');
+                        okMessageCtrl.show();
+                    },
+                    error: function () {
+                        failMessageCtrl.show();
                     }
                 });
             }
         };
-        console.log(userInfo)
     }])
 
     .controller('LoginCtrl', function ($rootScope, $scope, $state) {
@@ -152,6 +197,4 @@ angular.module('starter.controllers', [])
                 });
             }
         };
-
-        console.log('aici');
     });
