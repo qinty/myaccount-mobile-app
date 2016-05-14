@@ -21,39 +21,70 @@ angular.module('starter', ['ionic', 'starter.controllers', 'jett.ionic.filter.ba
             }
 
             var push = new Ionic.Push({
-                debug: true,
-                onNotification: function (notification) {
+                "debug": true,
+                canShowAlert: true, //Can pushes show an alert on your screen?
+                canSetBadge: true, //Can pushes update app icon badges?
+                canPlaySound: true, //Can notifications play a sound?
+                canRunActionsOnWake: true, //Can run actions outside the app,
+
+                "onNotification": function (notification) {
+                    console.log(notification);
                     // this function will be called when your device receives a notification, and provided with the notification object received.
                     var payload = notification.payload;
                     console.log(notification);
-                    console.log(payload);
+
+                    if (payload.productCode !== undefined) {
+                        navigator.notification.confirm('', function(btn) {
+                            if (btn === 1) {
+                                $state.go('app.single', {'productCode':payload.productCode});
+                            }
+                        }, notification.text)
+
+
+                    }
+
+                    return true;
                 },
-                onRegister: function (data) {
+
+                "onRegister": function (data) {
                     // This function will be called upon successful registration of your device,
                     // and provided with a data argument that contains a token string with your device token.
 
                     //console.log(data);
-                },
-                pluginConfig: {
-                    ios: {
-                        badge: true,
-                        sound: true
-                    },
-
-                    android: {
-                        iconColor: "#ff3333"
-                    }
                 }
+
+                //"pluginConfig": {
+                //    ios: {
+                //        alert: true,
+                //        badge: true,
+                //        sound: true
+                //    },
+                //
+                //    android: {
+                //        iconColor: "#ff3333"
+                //    }
+                //}
+            });
+
+            push.register(function (token) {
+                //console.log({
+                //    username: email,
+                //    token: token._token
+                //});
+
+                //alert(["Device token: ", token.token]);
+                push.saveToken(token);  // persist the token in the Ionic Platform
             });
 
             $rootScope.$on('login-success', function(event, args) {
                 email = args.email;
 
                 push.register(function (token) {
-                    console.log({
-                        username: email,
-                        token: token._token
-                    });
+                    //console.log({
+                    //    username: email,
+                    //    token: token._token
+                    //});
+
                     //alert(["Device token: ", token.token]);
                     push.saveToken(token);  // persist the token in the Ionic Platform
 
