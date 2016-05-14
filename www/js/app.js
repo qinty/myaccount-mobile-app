@@ -6,7 +6,7 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers', 'jett.ionic.filter.bar', 'ngCordova', 'ionic-native-transitions'])
 
-    .run(['$ionicPlatform', '$cordovaToast', '$cordovaContacts', function ($ionicPlatform) {
+    .run(['$ionicPlatform', '$cordovaToast', '$cordovaContacts', '$state', '$rootScope', function ($ionicPlatform, $cordovaToast, $cordovaContacts, $state, $rootScope) {
         $ionicPlatform.ready(function () {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
@@ -25,13 +25,14 @@ angular.module('starter', ['ionic', 'starter.controllers', 'jett.ionic.filter.ba
                 onNotification: function (notification) {
                     // this function will be called when your device receives a notification, and provided with the notification object received.
                     var payload = notification.payload;
-                    console.log(notification, payload);
+                    console.log(notification);
+                    console.log(payload);
                 },
                 onRegister: function (data) {
                     // This function will be called upon successful registration of your device,
                     // and provided with a data argument that contains a token string with your device token.
 
-                    console.log(data);
+                    //console.log(data);
                 },
                 pluginConfig: {
                     ios: {
@@ -45,10 +46,31 @@ angular.module('starter', ['ionic', 'starter.controllers', 'jett.ionic.filter.ba
                 }
             });
 
-            push.register(function(token) {
-                console.log(token.token);
-                //alert(["Device token: ", token.token]);
-                push.saveToken(token);  // persist the token in the Ionic Platform
+            $rootScope.$on('login-success', function(event, args) {
+                email = args.email;
+
+                push.register(function (token) {
+                    console.log({
+                        username: email,
+                        token: token._token
+                    });
+                    //alert(["Device token: ", token.token]);
+                    push.saveToken(token);  // persist the token in the Ionic Platform
+
+                    $.ajax({
+                        type: 'GET',
+                        url: 'http://ec2-52-50-67-73.eu-west-1.compute.amazonaws.com/api/devices',
+                        dataType: 'json',
+                        data: {
+                            username: email,
+                            token: token._token
+                        },
+                        success: function (data) {
+                            console.log('register token response:');
+                            console.log(data);
+                        }
+                    });
+                });
             });
         });
     }])

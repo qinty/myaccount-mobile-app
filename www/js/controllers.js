@@ -150,6 +150,11 @@ angular.module('starter.controllers', [])
                         $state.go('app.products');
                     }
                 });
+
+                $rootScope.$broadcast('login-success', {
+                    email: emailCtrl.val()
+                });
+
             }
         };
 
