@@ -6,7 +6,7 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers', 'jett.ionic.filter.bar', 'ngCordova', 'ionic-native-transitions'])
 
-    .run(['$ionicPlatform', '$cordovaToast', '$cordovaContacts', function ($ionicPlatform) {
+    .run(['$ionicPlatform', '$cordovaToast', '$cordovaContacts', '$rootScope', function ($ionicPlatform, $cordovaToast, $cordovaContacts, $rootScope) {
         $ionicPlatform.ready(function () {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
