@@ -1,1 +1,35 @@
 /* Empty. Add your own CSS if you like */
+.bar {
+  height: 70px;
+  padding: 0;
+  border: none;
+}
+
+.scroll-content {
+  top: 70px;
+}
+
+.input-form {
+  font-size: 12px !important;
+}
+
+input[required="required"] {
+  box-shadow: none !important;
+  outline: none;
+}
+
+.radio-button {
+  display: inline-block;
+  float: right;
+  margin-left: 11px;
+  position: relative;
+}
+
+.radio-bullet-replacement {
+  left: 4px;
+  position: absolute;
+}
+
+.radio-button label {
+  font-size: 12px;
+}
