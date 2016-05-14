@@ -112,9 +112,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'jett.ionic.filter.ba
             var currentRoute = next.split('#');
             currentRoute     = currentRoute[1];
 
-            console.log(next)
             var title   = '',
                 showNav = true;
+
             switch (currentRoute) {
                 case '/app/profile':
                 {
@@ -134,6 +134,13 @@ angular.module('starter', ['ionic', 'starter.controllers', 'jett.ionic.filter.ba
                 case '/app/login':
                 {
                     title = 'Login';
+                    showNav = false;
+                    break;
+                }
+                case '#/app/products/1':
+                case '#/app/products/2':
+                {
+                    title = 'Subscription';
                     showNav = false;
                     break;
                 }

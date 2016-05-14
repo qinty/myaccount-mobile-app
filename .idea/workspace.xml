@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="52a0d69d-d03a-4505-9805-066eae430bf2" name="Default" comment="prepare for deploy...kidding">
+    <list default="true" id="52a0d69d-d03a-4505-9805-066eae430bf2" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/css/style.css" afterPath="$PROJECT_DIR$/www/css/style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/templates/product.html" afterPath="$PROJECT_DIR$/www/templates/product.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/app.js" afterPath="$PROJECT_DIR$/www/js/app.js" />
     </list>
     <ignored path="myaccount-mobile-app.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -36,11 +35,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="app.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/www/js/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3285">
-              <caret line="219" column="22" selection-start-line="219" selection-start-column="22" selection-end-line="219" selection-end-column="22" />
+            <state relative-caret-position="265">
+              <caret line="128" column="34" selection-start-line="128" selection-start-column="34" selection-end-line="128" selection-end-column="34" />
               <folding />
             </state>
           </provider>
@@ -111,7 +110,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="product.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="product.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/templates/product.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="450">
@@ -156,13 +155,13 @@
         <option value="$PROJECT_DIR$/www/js/library.js" />
         <option value="$PROJECT_DIR$/www/templates/profile.html" />
         <option value="$PROJECT_DIR$/www/index.html" />
-        <option value="$PROJECT_DIR$/www/js/app.js" />
         <option value="$PROJECT_DIR$/www/templates/cards.html" />
         <option value="$PROJECT_DIR$/www/js/controllers.js" />
         <option value="$PROJECT_DIR$/www/css/styles.css" />
         <option value="$PROJECT_DIR$/www/css/style.css" />
         <option value="$PROJECT_DIR$/www/templates/products.html" />
         <option value="$PROJECT_DIR$/www/templates/product.html" />
+        <option value="$PROJECT_DIR$/www/js/app.js" />
       </list>
     </option>
   </component>
@@ -435,7 +434,7 @@
       <updated>1463208296550</updated>
       <workItem from="1463208654266" duration="5744000" />
       <workItem from="1463215394404" duration="1933000" />
-      <workItem from="1463248974208" duration="734000" />
+      <workItem from="1463248974208" duration="1148000" />
     </task>
     <task id="LOCAL-00001" summary="commit for gitignore">
       <created>1463209301415</created>
@@ -479,11 +478,18 @@
       <option name="project" value="LOCAL" />
       <updated>1463246398521</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="prepare for deploy...kidding">
+      <created>1463249713012</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1463249713012</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="29171000" />
+    <option name="totallyTimeSpent" value="29585000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1867" height="1177" extended-state="6" />
@@ -852,14 +858,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3285">
-          <caret line="219" column="22" selection-start-line="219" selection-start-column="22" selection-end-line="219" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/templates/cards.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
@@ -914,6 +912,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="450">
           <caret line="30" column="38" selection-start-line="30" selection-start-column="38" selection-end-line="30" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="265">
+          <caret line="128" column="34" selection-start-line="128" selection-start-column="34" selection-end-line="128" selection-end-column="34" />
           <folding />
         </state>
       </provider>
