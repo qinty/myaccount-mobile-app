@@ -45,6 +45,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'jett.ionic.filter.ba
                             }
                         });
                     }
+
                     return true;
                 },
 
