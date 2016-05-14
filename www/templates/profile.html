@@ -1,0 +1,49 @@
+<ion-view view-title="Settings">
+    <ion-content>
+        <div class="w-form" style="padding-left: 5px; padding-right: 5px">
+            <form id="profile-form" name="email-form" action="#">
+                <div class="separator-button-input"></div>
+                <div>
+                    <label class="label-form">EMAIL</label>
+                    <input class="w-input input-form" type="email" readonly="readonly" value="{{user.email}}">
+                    <div class="separator-fields"></div>
+                </div>
+                <div>
+                    <label class="label-form">FIRST NAME</label>
+                    <input class="w-input input-form" type="text" id="ebFirstName" value="{{user.firstName}}">
+                    <div class="separator-fields"></div>
+                </div>
+                <div>
+                    <label class="label-form">LAST NAME</label>
+                    <input class="w-input input-form" type="text" id="ebLastName" value="{{user.lastName}}">
+                    <div class="separator-fields"></div>
+                </div>
+                <div>
+                    <label class="label-form">COUNTRY</label>
+                    <select class="w-input input-form"
+                            id="sltCountries"
+                            ng-options="country.id as country.name for country in countries"
+                            ng-model="user.countryId"></select>
+                    <div class="separator-fields"></div>
+                </div>
+                <div>
+                    <label class="label-form">CITY</label>
+                    <input class="w-input input-form" type="text" id="ebFirstName" value="{{user.city}}">
+                    <div class="separator-fields"></div>
+                </div>
+                <div>
+                    <label class="label-form">ADDRESS</label>
+                    <input class="w-input input-form" type="text" id="ebFirstName" value="{{user.address}}">
+                    <div class="separator-fields"></div>
+                </div>
+                <button class="w-button action-button" type="button" data-wait="Please wait..." ng-click="save();">Save</button>
+            </form>
+            <div class="w-form-done">
+                <p>Thank you! Your submission has been received!</p>
+            </div>
+            <div class="w-form-fail">
+                <p>Oops! Something went wrong while submitting the form</p>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

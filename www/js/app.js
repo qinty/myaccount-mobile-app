@@ -115,11 +115,4 @@ angular.module('starter', ['ionic', 'starter.controllers', 'jett.ionic.filter.ba
             })
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/app/products');
-    })
-    //.controller('PushCtrl', function ($scope, $rootScope, $ionicUser, $ionicPush) {
-    //    $rootScope.$on('$cordovaPush:tokenReceived', function (event, data) {
-    //        alert([event, data]);
-    //    });
-    //})
-;
-
+    });

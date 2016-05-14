@@ -1,6 +1,7 @@
+
 angular.module('starter.controllers', [])
 
-    .controller('AppCtrl', function ($rootScope, $scope, $location) {
+    .controller('AppCtrl', function ($rootScope, $scope, $state) {
 
         // With the new view caching in Ionic, Controllers are only called
         // when they are recreated or on app start, instead of every page change.
@@ -9,49 +10,147 @@ angular.module('starter.controllers', [])
         //$scope.$on('$ionicView.enter', function(e) {
         //});
 
-        $rootScope.showHeader = true;
         // Form data for the login modal
-        $rootScope.loginData = {};
-
+        $rootScope.loginData  = {};
+        $rootScope.showHeader = true;
         $rootScope.checkLogin = function () {
+            //localStorage.removeItem('user');
             var userInfo = localStorage.getItem('user');
             if (!userInfo) {
-                console.log('go to');
-                $location.path("/app/login" );
-                //$rootScope.modal.show();
+                $state.go('app.login');
+                return false;
+            } else {
+                userInfo = JSON.parse(userInfo);
+                return true;
             }
         };
     })
 
-    .controller('ProductsCtrl', ['$rootScope', '$scope', '$http', function ($rootScope, $scope, $http) {
-        //$rootScope.checkLogin();
-        //$scope.login();
-        //console.log('aici')
-        // $http({
-        //     method: 'GET',
-        //     url: 'http://shopping-cart.dev/api/products'
-        // }).then(function successCallback(response) {
-        //     console.log(response.data)
-        //     // this callback will be called asynchronously
-        //     // when the response is available
-        // }, function errorCallback(response) {
-        //     // called asynchronously if an error occurs
-        //     // or server returns response with an error status.
-        // });
+    .controller('ProductsCtrl', ['$rootScope', '$scope', function ($rootScope, $scope) {
+        if (!$rootScope.checkLogin()) {
+            return;
+        }
+
+        $('#main-nav').show();
+        $('#page-title').html('My Subscriptions');
+
+        var userInfo = getUser();
+        $.ajax({
+            type: 'GET',
+            url: 'http://www.myaccount.dev/api/subscriptions',
+            dataType: 'json',
+            data: {
+               username: userInfo.email
+            },
+            success: function (data) {
+                $scope.products = data;
+            }
+        });
     }])
 
-    .controller('ProductCtrl', function ($scope, $stateParams) {
-    })
+    .controller('ProductCtrl', ['$rootScope', '$scope', '$stateParams', function ($rootScope, $scope, $stateParams) {
+        if (!$rootScope.checkLogin()) {
+            return;
+        }
 
-    .controller('SettingsCtrl', ['$rootScope', '$scope', '$http', function ($rootScope, $scope, $http) {
+        $('#main-nav').show();
+        $('#page-title').html('Subscription');
+
+        var userInfo = getUser();
+        $.ajax({
+            type: 'GET',
+            url: 'http://www.myaccount.dev/api/subscriptions/' + $stateParams.productCode,
+            dataType: 'json',
+            data: {
+                username: userInfo.email
+            },
+            success: function (data) {
+                $('#page-title').html(data.name);
+                $scope.product = data;
+            }
+        });
     }])
 
+    .controller('ProfileCtrl', ['$rootScope', '$scope', '$http', function ($rootScope, $scope, $http) {
+        var userInfo = getUser();
+        $scope.user = userInfo;
+        $scope.save = function () {
+            var formCtrl     = $('#profile-form'),
+                firstNameCtrl = formCtrl.find('#ebFirstNameCtrl'),
+                allOk        = true;
 
-    .controller('LoginCtrl', function ($rootScope, $scope) {
+            if (!isEmailAddress(emailCtrl.val())) {
+                emailCtrl.addClass('required');
+                allOk = false;
+            } else {
+                emailCtrl.removeClass('required');
+            }
+
+            if (passwordCtrl.val() == '') {
+                passwordCtrl.addClass('required');
+                allOk = false;
+            } else {
+                passwordCtrl.removeClass('required');
+            }
+
+            if (allOk) {
+                $.ajax({
+                    type: 'GET',
+                    url: 'http://www.myaccount.dev/api/login',
+                    dataType: 'json',
+                    data: {
+                        username: emailCtrl.val(),
+                        password: passwordCtrl.val()
+                    },
+                    success: function (data) {
+                        localStorage.setItem('user', JSON.stringify(data));
+                        $state.go('app.products');
+                    }
+                });
+            }
+        };
+        console.log(userInfo)
+    }])
+
+    .controller('LoginCtrl', function ($rootScope, $scope, $state) {
         $rootScope.showHeader = false;
-
+        $('#main-nav').hide();
         $scope.login = function () {
 
+            var formCtrl     = $('#login-form'),
+                emailCtrl    = formCtrl.find('#ebEmail'),
+                passwordCtrl = formCtrl.find('#ebPassword'),
+                allOk        = true;
+
+            if (!isEmailAddress(emailCtrl.val())) {
+                emailCtrl.addClass('required');
+                allOk = false;
+            } else {
+                emailCtrl.removeClass('required');
+            }
+
+            if (passwordCtrl.val() == '') {
+                passwordCtrl.addClass('required');
+                allOk = false;
+            } else {
+                passwordCtrl.removeClass('required');
+            }
+
+            if (allOk) {
+                $.ajax({
+                    type: 'GET',
+                    url: 'http://www.myaccount.dev/api/login',
+                    dataType: 'json',
+                    data: {
+                        username: emailCtrl.val(),
+                        password: passwordCtrl.val()
+                    },
+                    success: function (data) {
+                        localStorage.setItem('user', JSON.stringify(data));
+                        $state.go('app.products');
+                    }
+                });
+            }
         };
 
         console.log('aici');
